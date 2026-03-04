@@ -1,3 +1,5 @@
-export const Home = () => {
-  return <div>Home</div>;
+import { CollectionGrid } from "@/components/CollectionGrid";
+
+export const HomePage = () => {
+  return <CollectionGrid />;
 };
