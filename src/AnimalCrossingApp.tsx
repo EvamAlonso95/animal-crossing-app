@@ -1,4 +1,4 @@
-import { Button } from "./components/ui/button";
+import { CollectionGrid } from "./components/CollectionGrid";
 
 export const AnimalCrossingApp = () => {
   return (
@@ -7,7 +7,7 @@ export const AnimalCrossingApp = () => {
         <h1 className="text-8xl justify-items-center font-acnh-title">
           Hola Mundo
         </h1>
-        <Button>Click me</Button>
+        <CollectionGrid />
       </div>
     </>
   );
