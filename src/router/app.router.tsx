@@ -1,4 +1,5 @@
 import { AnimalCrossingLayout } from "@/collectionables/layouts/AnimalCrossingLayout";
+import { CollectionList } from "@/collectionables/pages/CollectionList";
 import { HomePage } from "@/collectionables/pages/Home";
 import { ItemDetail } from "@/collectionables/pages/ItemDetail";
 import { createBrowserRouter, Navigate } from "react-router";
@@ -11,6 +12,10 @@ export const appRouter = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "item-list/:itemName", //Le ponemos el nombre a la variable que pasará por ahi
+        element: <CollectionList />,
       },
       {
         path: "item/:id", //Le ponemos el nombre a la variable que pasará por ahi

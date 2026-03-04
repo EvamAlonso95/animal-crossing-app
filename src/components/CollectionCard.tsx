@@ -6,7 +6,7 @@ export interface CardProps {
 export const CollectionCard = ({ image }: CardProps) => {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`item/1`); //url friendly
+    navigate(`item-list/:nameItem`); //url friendly
   };
   return (
     <div className="flex items-center justify-center cursor-pointer size-48 bg-indigo-300 text-white mb-1 rounded-3xl">
