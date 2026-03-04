@@ -1,15 +1,8 @@
 export interface Fossil {
   name: string;
   url: string;
-  room: number;
-  description: string;
-  fossils: FossilElement[];
-}
-
-export interface FossilElement {
-  name: string;
-  url: string;
   image_url: string;
+  fossil_group: string;
   interactable: boolean;
   sell: number;
   hha_base: number;
@@ -20,5 +13,8 @@ export interface FossilElement {
 
 export enum Color {
   Beige = "Beige",
+  Black = "Black",
   Brown = "Brown",
+  Gray = "Gray",
+  Yellow = "Yellow",
 }
