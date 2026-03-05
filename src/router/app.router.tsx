@@ -18,7 +18,7 @@ export const appRouter = createBrowserRouter([
         element: <CollectionList />,
       },
       {
-        path: "item/:id", //Le ponemos el nombre a la variable que pasará por ahi
+        path: "item/:fossilname", //Le ponemos el nombre a la variable que pasará por ahi
         element: <ItemDetail />,
       },
 
