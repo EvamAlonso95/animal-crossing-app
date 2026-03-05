@@ -143,6 +143,7 @@
 
 .font-acnh-text {
   font-family: var(--font-acnh-text) !important;
+  font-weight: 300 !important;
 }
 
 @layer base {
