@@ -1,7 +1,7 @@
+import { FossilPage } from "@/collectionables/fossils/page/FossilPage";
 import { AnimalCrossingLayout } from "@/collectionables/layouts/AnimalCrossingLayout";
 import { CollectionList } from "@/collectionables/pages/CollectionList";
 import { HomePage } from "@/collectionables/pages/Home";
-import { ItemDetail } from "@/collectionables/pages/ItemDetail";
 import { createBrowserRouter, Navigate } from "react-router";
 
 export const appRouter = createBrowserRouter([
@@ -19,7 +19,7 @@ export const appRouter = createBrowserRouter([
       },
       {
         path: "item/:fossilname", //Le ponemos el nombre a la variable que pasará por ahi
-        element: <ItemDetail />,
+        element: <FossilPage />,
       },
 
       {
