@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getFossilAction } from "../fossils/actions/get-fossil.action";
+import { getFossilAction } from "../actions/get-fossil.action";
 
 export const useFossilInfo = (fossilName: string) => {
   return useQuery({
