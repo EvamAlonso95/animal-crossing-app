@@ -1,7 +1,7 @@
-import { useAllFossils } from "@/collectionables/hooks/useAllFossils";
-import { useFossilInfo } from "@/collectionables/hooks/useFossilInfo";
-import { useRandomFossils } from "@/collectionables/hooks/useRandomFossils";
 import { useParams } from "react-router";
+import { useRandomFossils } from "../hooks/useRandomFossils";
+import { useAllFossils } from "../hooks/useAllFossils";
+import { useFossilInfo } from "../hooks/useFossilInfo";
 // import { useFossilInfo } from "../hooks/useFossilInfo";
 
 export const FossilPage = () => {

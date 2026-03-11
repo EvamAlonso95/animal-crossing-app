@@ -1,5 +1,4 @@
-import { useAllFossils } from "@/collectionables/hooks/useAllFossils";
-
+import { useAllFossils } from "@/collectionables/fossils/hooks/useAllFossils";
 import { useNavigate } from "react-router";
 
 export const ItemCard = () => {
