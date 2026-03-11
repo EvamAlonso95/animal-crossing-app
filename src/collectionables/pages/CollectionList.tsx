@@ -1,5 +1,9 @@
 import { ItemCard } from "@/components/ItemCard";
+import { useParams } from "react-router";
 
 export const CollectionList = () => {
-  return <ItemCard />;
+  const { itemCategory } = useParams();
+
+  console.log({ itemCategory });
+  return <ItemCard itemCategory={itemCategory ?? ""} />;
 };

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import type { Fossil } from "../types/fossil.interface";
+import type { Fossil } from "../../types/fossil.interface";
 
 // Hook personalizado para seleccionar 3 fósiles aleatorios
 export const useRandomFossils = (fossils: Fossil[]) => {
