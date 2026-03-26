@@ -5,14 +5,40 @@ import bug from "../assets/img/Bug_NH_Icon.png";
 import mollusks from "../assets/img/Sea_Creature_NH_Icon.png";
 import { Leaf } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Category } from "@/collectionables/types/categories.interface";
+import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
+import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
+import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
 
-const cardsImg = [
-  { id: 1, image: fossil, href: "/fossils" },
-  { id: 2, image: fish, href: "/fishes" },
-  { id: 3, image: bug, href: "/bugs" },
-  { id: 4, image: mollusks, href: "/mollusks" },
+const cardsImg: {
+  id: number;
+  image: string;
+  href: string;
+  category: Category;
+}[] = [
+  { id: 1, image: fossil, href: "/fossils", category: "fossils" },
+  { id: 2, image: fish, href: "/fishes", category: "fishes" },
+  { id: 3, image: bug, href: "/bugs", category: "bugs" },
+  { id: 4, image: mollusks, href: "/mollusks", category: "sea" },
 ];
+
 export const CollectionGrid = () => {
+  const { data: fossils = [] } = useAllCollectionables(
+    "fossils",
+    getAllFossilAction,
+  );
+  const { data: fishes = [] } = useAllCollectionables(
+    "fishes",
+    getAllFishesAction,
+  );
+
+  const totalItemsMap: Record<Category, number> = {
+    fossils: fossils.length,
+    fishes: fishes.length,
+    bugs: 0,
+    sea: 0,
+  };
+
   return (
     <div className=" py-8 md:py-12 flex justify-center items-center flex-col">
       <motion.div
@@ -36,11 +62,14 @@ export const CollectionGrid = () => {
         </p>
       </motion.div>
       <div className="flex gap-3 mb-3">
-        {cardsImg.map((card) => (
+        {cardsImg.map((card, index) => (
           <CollectionCard
             key={card.id}
             image={card.image}
             href={card.href}
+            index={index}
+            category={card.category}
+            totalItems={totalItemsMap[card.category]}
           ></CollectionCard>
         ))}
       </div>

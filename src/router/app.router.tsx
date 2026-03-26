@@ -13,8 +13,9 @@ export const appRouter = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+
       {
-        path: "item-list/:itemCategory", //Le ponemos el nombre a la variable que pasará por ahi
+        path: ":itemCategory", //Le ponemos el nombre a la variable que pasará por ahi
         element: <CollectionList />,
       },
       {

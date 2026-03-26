@@ -1,22 +1,58 @@
-import { useNavigate } from "react-router";
+import {
+  categoryLabels,
+  type Category,
+} from "@/collectionables/types/categories.interface";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Link } from "react-router";
 
 export interface CardProps {
   image: string;
   href: string;
+  index: number;
+  category: Category;
+  totalItems: number;
 }
-export const CollectionCard = ({ image, href }: CardProps) => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/item-list/${href}`); //url friendly
-  };
+
+const bgClasses: Record<Category, string> = {
+  fossils: "bg-pink-400/20",
+  fishes: "bg-cyan-300/20",
+  bugs: "bg-amber-900/20",
+  sea: "bg-blue-700/20",
+};
+
+export const CollectionCard = ({
+  image,
+  href,
+  index,
+  category,
+  totalItems,
+}: CardProps) => {
+  // const handleClick = () => {
+  //   navigate(`/item-list/${href}`);
+  // };
   return (
-    <div className="flex items-center justify-center cursor-pointer size-48 bg-indigo-300 text-white mb-1 rounded-3xl">
-      <img
-        className="w-3/4 h-3/4 object-contain bg-indigo-100 rounded-2xl p-4 hover:p-1 hover:transition-all "
-        src={image}
-        alt={href}
-        onClick={handleClick}
-      />
-    </div>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.1, duration: 0.4 }}
+    >
+      <Link to={href} className="block group">
+        <div
+          className={`relative overflow-hidden rounded-2xl border-none p-6 transition-all duration-300
+            shadow-card hover:shadow-card-hover hover:-translate-y-1 ${bgClasses[category]}`}
+        >
+          <img className="drop-shadow-xl" src={image} />
+
+          <h2 className="font-display text-xl font-bold text-zinc-900 font-acnh-text: mb-1">
+            {categoryLabels[category]}
+          </h2>
+          <p className="text-sm text-muted-foreground font-body">
+            {totalItems} elementos
+          </p>
+          <ArrowRight className="absolute bottom-5 right-5 h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+        </div>
+      </Link>
+    </motion.div>
   );
 };
