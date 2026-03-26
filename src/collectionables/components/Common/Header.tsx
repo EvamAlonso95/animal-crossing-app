@@ -24,7 +24,7 @@ export default function Header() {
             return (
               <Link
                 key={cat}
-                to={`/item-list/${cat}`}
+                to={`${cat}`}
                 className={`px-3 py-1.5 rounded-4xl text-sm font-display font-bold transition-colors
                   ${isActive ? "bg-lime-600 text-primary-foreground" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}
               >

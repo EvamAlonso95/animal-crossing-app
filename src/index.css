@@ -100,7 +100,8 @@
   --sidebar-ring: oklch(0.709 0.01 56.259);
   /* Mis fuentes */
   --font-acnh-title: "Nunito", sans-serif;
-  --font-acnh-text: "Varela Round", sans-serif --bg-gradient: #f6f9f0;
+  --font-acnh-text: "Varela Round", sans-serif;
+  --bg-gradient: #f7faf0;
   /* --bg-gradient: linear-gradient(135deg, #d4e5c8 0%, #eaf5ef 100%); */
 }
 

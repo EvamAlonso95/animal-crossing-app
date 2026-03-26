@@ -28,9 +28,6 @@ export const CollectionCard = ({
   category,
   totalItems,
 }: CardProps) => {
-  // const handleClick = () => {
-  //   navigate(`/item-list/${href}`);
-  // };
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
