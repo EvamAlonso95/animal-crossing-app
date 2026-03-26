@@ -10,7 +10,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-md font-acnh-title">
-      <div className="container flex justify-evenly py-3">
+      <div className="container flex justify-evenly py-3 max-w-none">
         <Link to="/" className="flex items-center gap-2 group">
           <Leaf className="h-7 w-7 animate-leaf-float text-lime-600" />
           <span className="font-display text-xl font-black tracking-tight text-foreground">
