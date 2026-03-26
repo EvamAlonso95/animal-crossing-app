@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Varela+Round&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
@@ -98,9 +99,9 @@
   --sidebar-border: oklch(0.923 0.003 48.717);
   --sidebar-ring: oklch(0.709 0.01 56.259);
   /* Mis fuentes */
-  --font-acnh-title: "FinkHeavy";
-  --font-acnh-text: "FotRodin";
-  --bg-gradient: linear-gradient(135deg, #d4e5c8 0%, #eaf5ef 100%);
+  --font-acnh-title: "Nunito", sans-serif;
+  --font-acnh-text: "Varela Round", sans-serif --bg-gradient: #f6f9f0;
+  /* --bg-gradient: linear-gradient(135deg, #d4e5c8 0%, #eaf5ef 100%); */
 }
 
 .dark {
@@ -152,6 +153,6 @@
   }
   body {
     @apply text-foreground;
-    background-image: var(--bg-gradient);
+    background-color: var(--bg-gradient);
   }
 }
