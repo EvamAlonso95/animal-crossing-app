@@ -10,6 +10,7 @@ import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectiona
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
 import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
+import { getAllMollusksAction } from "@/collectionables/mollusks/action/get-all-fishess.action";
 
 const cardsImg: {
   id: number;
@@ -20,7 +21,7 @@ const cardsImg: {
   { id: 1, image: fossil, href: "/fossils", category: "fossils" },
   { id: 2, image: fish, href: "/fishes", category: "fishes" },
   { id: 3, image: bug, href: "/bugs", category: "bugs" },
-  { id: 4, image: mollusks, href: "/mollusks", category: "sea" },
+  { id: 4, image: mollusks, href: "/sea", category: "sea" },
 ];
 
 export const CollectionGrid = () => {
@@ -35,11 +36,16 @@ export const CollectionGrid = () => {
 
   const { data: bugs = [] } = useAllCollectionables("bugs", getAllBugsAction);
 
+  const { data: mollusks = [] } = useAllCollectionables(
+    "sea",
+    getAllMollusksAction,
+  );
+
   const totalItemsMap: Record<Category, number> = {
     fossils: fossils.length,
     fishes: fishes.length,
     bugs: bugs.length,
-    sea: 0,
+    sea: mollusks.length,
   };
 
   return (

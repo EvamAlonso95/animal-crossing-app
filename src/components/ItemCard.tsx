@@ -27,7 +27,7 @@ const categoryColors: Record<string, { outer: string; inner: string }> = {
   fossils: { outer: "bg-pink-100", inner: "bg-pink-50" },
   fishes: { outer: "bg-cyan-100", inner: "bg-cyan-50" },
   bugs: { outer: "bg-amber-100", inner: "bg-amber-50" },
-  mollusks: { outer: "bg-blue-100", inner: "bg-blue-50" },
+  sea: { outer: "bg-blue-100", inner: "bg-blue-50" },
 };
 
 export const ItemCard = ({ itemCategory }: Props) => {
