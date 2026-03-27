@@ -4,6 +4,7 @@ import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectiona
 import { Link, useNavigate } from "react-router";
 
 import { ArrowLeft, Search } from "lucide-react";
+import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
 
 // const ITEMS_PER_PAGE = 20;
 
@@ -19,6 +20,7 @@ interface Props {
 const actionMap: Record<string, () => Promise<Collectionable[]>> = {
   fossils: getAllFossilAction,
   fishes: getAllFishesAction,
+  bugs: getAllBugsAction,
 };
 
 const categoryColors: Record<string, { outer: string; inner: string }> = {

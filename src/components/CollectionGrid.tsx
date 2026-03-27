@@ -9,6 +9,7 @@ import type { Category } from "@/collectionables/types/categories.interface";
 import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
+import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
 
 const cardsImg: {
   id: number;
@@ -32,10 +33,12 @@ export const CollectionGrid = () => {
     getAllFishesAction,
   );
 
+  const { data: bugs = [] } = useAllCollectionables("bugs", getAllBugsAction);
+
   const totalItemsMap: Record<Category, number> = {
     fossils: fossils.length,
     fishes: fishes.length,
-    bugs: 0,
+    bugs: bugs.length,
     sea: 0,
   };
 
