@@ -6,11 +6,8 @@ import mollusks from "../assets/img/Sea_Creature_NH_Icon.png";
 import { Leaf } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Category } from "@/collectionables/types/categories.interface";
-import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
-import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
-import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
-import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
-import { getAllMollusksAction } from "@/collectionables/mollusks/action/get-all-fishess.action";
+
+import { useGetTotalItems } from "@/collectionables/hooks/useGetTotalItems";
 
 const cardsImg: {
   id: number;
@@ -25,28 +22,7 @@ const cardsImg: {
 ];
 
 export const CollectionGrid = () => {
-  const { data: fossils = [] } = useAllCollectionables(
-    "fossils",
-    getAllFossilAction,
-  );
-  const { data: fishes = [] } = useAllCollectionables(
-    "fishes",
-    getAllFishesAction,
-  );
-
-  const { data: bugs = [] } = useAllCollectionables("bugs", getAllBugsAction);
-
-  const { data: mollusks = [] } = useAllCollectionables(
-    "sea",
-    getAllMollusksAction,
-  );
-
-  const totalItemsMap: Record<Category, number> = {
-    fossils: fossils.length,
-    fishes: fishes.length,
-    bugs: bugs.length,
-    sea: mollusks.length,
-  };
+  const totalItemsMap = useGetTotalItems();
 
   return (
     <div className=" py-8 md:py-12 flex justify-center items-center flex-col">

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router";
 
 import { ArrowLeft, Search } from "lucide-react";
 import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
+import { useGetTotalItems } from "@/collectionables/hooks/useGetTotalItems";
 
 // const ITEMS_PER_PAGE = 20;
 
@@ -33,6 +34,9 @@ const categoryColors: Record<string, { outer: string; inner: string }> = {
 export const ItemCard = ({ itemCategory }: Props) => {
   const navigate = useNavigate();
 
+  const totalItemsMap = useGetTotalItems();
+  console.log({ totalItemsMap });
+
   const queryFn = actionMap[itemCategory] ?? (() => Promise.resolve([]));
 
   const { data: items = [] } = useAllCollectionables(itemCategory, queryFn);
@@ -41,6 +45,28 @@ export const ItemCard = ({ itemCategory }: Props) => {
     outer: "bg-stone-100",
     inner: "bg-stone-50",
   };
+
+  const displayName =
+    itemCategory === "fossils"
+      ? "Fósiles"
+      : itemCategory === "fishes"
+        ? "Peces"
+        : itemCategory === "bugs"
+          ? "Bichos"
+          : itemCategory === "sea"
+            ? "Moluscos"
+            : itemCategory;
+
+  const totalCount =
+    itemCategory === "fossils"
+      ? totalItemsMap.fossils
+      : itemCategory === "fishes"
+        ? totalItemsMap.fishes
+        : itemCategory === "bugs"
+          ? totalItemsMap.bugs
+          : itemCategory === "sea"
+            ? totalItemsMap.sea
+            : 0;
 
   const handleClick = (itemName: string) => {
     navigate(`/item/${itemName}`);
@@ -56,16 +82,10 @@ export const ItemCard = ({ itemCategory }: Props) => {
           <ArrowLeft className="h-4 w-4 " />
         </Link>
         <h1 className="font-display text-2xl md:text-3xl font-black font-acnh-title">
-          {itemCategory === "fossils"
-            ? (itemCategory = "Fósiles")
-            : itemCategory === "fishes"
-              ? (itemCategory = "Peces")
-              : itemCategory === "bugs"
-                ? (itemCategory = "Bichos")
-                : "Moluscos"}
+          {displayName}
         </h1>
         <span className="ml-auto text-sm text-muted-foreground font-body">
-          {0} resultados
+          {totalCount} resultados
         </span>
       </div>
 

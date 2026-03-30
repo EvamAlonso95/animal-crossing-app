@@ -3,6 +3,15 @@ import type { Bug } from "@/collectionables/types/bug.interface";
 
 export const getAllBugsAction = async (): Promise<Bug[]> => {
   const { data } = await AnimalCrossingApi.get<Bug[]>("/bugs");
+  // Deduplicate by `number` (unique id provided by API) using Set+filter
 
-  return data;
+  const seen = new Set<number>();
+  const uniq = data.filter((bug) => {
+    if (!bug || typeof bug.number !== "number") return false;
+    if (seen.has(bug.number)) return false;
+    seen.add(bug.number);
+    return true;
+  });
+
+  return uniq;
 };
