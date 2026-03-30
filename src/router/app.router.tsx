@@ -1,4 +1,4 @@
-import { FossilPage } from "@/collectionables/fossils/page/FossilPage.Loable";
+import { FossilPage } from "@/collectionables/fossils/page/FossilPage";
 import { AnimalCrossingLayout } from "@/collectionables/layouts/AnimalCrossingLayout";
 import { CollectionList } from "@/collectionables/pages/CollectionList";
 import { HomePage } from "@/collectionables/pages/Home";

@@ -11,7 +11,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Coins, Droplets, InfoIcon, Ruler } from "lucide-react";
 // import { useFossilInfo } from "../hooks/useFossilInfo";
 
-export const FossilPage = () => {
+export const FossilPageEva = () => {
   const { fossilname } = useParams<{ fossilname: string }>();
 
   const { data: fossilData } = useFossilInfo(fossilname ?? "");
@@ -22,21 +22,6 @@ export const FossilPage = () => {
 
   return (
     <div className="container py-6 md:py-10">
-      {/* <div className="flex items-center gap-3 mb-6">
-        <Link
-          to={`/${category}`}
-          className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4" />
-        </Link>
-        <span className="text-sm text-muted-foreground font-body">
-          {categoryLabels[category as Category]} /
-        </span>
-        <span className="font-display font-bold text-foreground capitalize">
-          {itemName}
-        </span>
-      </div> */}
-
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
