@@ -1,11 +1,13 @@
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
 import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
-import { Link, useNavigate } from "react-router";
-
-import { ArrowLeft, Search } from "lucide-react";
+import { useNavigate } from "react-router";
+import { Search } from "lucide-react";
 import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
 import { useGetTotalItems } from "@/collectionables/hooks/useGetTotalItems";
+import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
+import { useGetcategoryNameEsp } from "@/collectionables/hooks/useGetcategoryNameEsp";
+import { CustomBreadCrums } from "@/collectionables/components/Custom/CustomBreadCrums";
 
 // const ITEMS_PER_PAGE = 20;
 
@@ -39,23 +41,17 @@ export const ItemCard = ({ itemCategory }: Props) => {
 
   const queryFn = actionMap[itemCategory] ?? (() => Promise.resolve([]));
 
-  const { data: items = [] } = useAllCollectionables(itemCategory, queryFn);
+  const { data: items = [], isLoading } = useAllCollectionables(
+    itemCategory,
+    queryFn,
+  );
 
   const colors = categoryColors[itemCategory] ?? {
     outer: "bg-stone-100",
     inner: "bg-stone-50",
   };
 
-  const displayName =
-    itemCategory === "fossils"
-      ? "Fósiles"
-      : itemCategory === "fishes"
-        ? "Peces"
-        : itemCategory === "bugs"
-          ? "Bichos"
-          : itemCategory === "sea"
-            ? "Moluscos"
-            : itemCategory;
+  const categoryName = useGetcategoryNameEsp(itemCategory);
 
   const totalCount =
     itemCategory === "fossils"
@@ -69,25 +65,13 @@ export const ItemCard = ({ itemCategory }: Props) => {
             : 0;
 
   const handleClick = (itemName: string) => {
-    navigate(`/item/${itemName}`);
+    navigate(`/${itemCategory}/${itemName}`);
   };
 
+  if (isLoading) return <CustomFullScreenLoading />;
   return (
     <div className="w-[80%] flex justify-center flex-col mx-auto">
-      <div className="flex items-center gap-3 mt-6 mb-6">
-        <Link
-          to="/"
-          className="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-        >
-          <ArrowLeft className="h-4 w-4 " />
-        </Link>
-        <h1 className="font-display text-2xl md:text-3xl font-black font-acnh-title">
-          {displayName}
-        </h1>
-        <span className="ml-auto text-sm text-muted-foreground font-body">
-          {totalCount} resultados
-        </span>
-      </div>
+      <CustomBreadCrums categoryName={categoryName} totalCount={totalCount} />
 
       <div className="w-fit mx-auto flex flex-col">
         <div className="relative mb-6">

@@ -1,12 +1,18 @@
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { useRandomFossils } from "../hooks/useRandomFossils";
 import { useAllFossils } from "../hooks/useAllFossils";
 import { useFossilInfo } from "../hooks/useFossilInfo";
+import { ArrowLeft } from "lucide-react";
+import { useGetcategoryNameEsp } from "@/collectionables/hooks/useGetcategoryNameEsp";
 // import { useFossilInfo } from "../hooks/useFossilInfo";
 
 export const FossilPage = () => {
-  const { fossilname } = useParams<{ fossilname: string }>();
+  const { itemCategory, fossilname } = useParams<{
+    itemCategory: string;
+    fossilname: string;
+  }>();
 
+  const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
   const { data: fossilData } = useFossilInfo(fossilname ?? "");
   const { data: fossils = [] } = useAllFossils();
   const randomFossils = useRandomFossils(fossils);
@@ -14,183 +20,22 @@ export const FossilPage = () => {
   console.log({ fossilData });
 
   return (
-    // <div className="max-w-4xl mx-auto bg-gray-50 min-h-screen pb-8">
-    //   {/* Header */}
-    //   <div className="bg-white px-4 py-5 border-b border-gray-200">
-    //     <div className="flex items-center justify-between">
-    //       <div className="flex items-center space-x-2">
-    //         <h1 className="text-2xl font-bold text-gray-900">
-    //           {fossilData?.name
-    //             ? fossilData.name.charAt(0).toUpperCase() +
-    //               fossilData.name.slice(1)
-    //             : ""}
-    //         </h1>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   {/* Main Content */}
-    //   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 px-4 mt-6">
-    //     {/* Left Column: Image + Action */}
-    //     <div className="lg:col-span-1">
-    //       <div className="bg-blue-50 rounded-2xl p-4 flex flex-col items-center">
-    //         <img
-    //           src={fossilData?.image_url}
-    //           alt="Red Snapper"
-    //           className="w-full max-w-[280px] h-auto rounded-xl shadow-sm"
-    //         />
-    //         <button className="mt-5 w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-xl flex items-center justify-center transition-colors">
-    //           <svg
-    //             xmlns="http://www.w3.org/2000/svg"
-    //             className="h-5 w-5 mr-2"
-    //             viewBox="0 0 20 20"
-    //             fill="currentColor"
-    //           >
-    //             <path d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" />
-    //           </svg>
-    //           Añadir al museo
-    //         </button>
-    //       </div>
-    //     </div>
-
-    //     {/* Right Column: Info Cards */}
-    //     <div className="lg:col-span-2 space-y-6">
-    //       {/* Info Grid */}
-    //       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-    //         <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-    //           <div className="flex items-center">
-    //             <div className="p-2 bg-blue-100 rounded-lg mr-3">
-    //               <svg
-    //                 xmlns="http://www.w3.org/2000/svg"
-    //                 className="h-5 w-5 text-blue-700"
-    //                 viewBox="0 0 20 20"
-    //                 fill="currentColor"
-    //               >
-    //                 <path
-    //                   fillRule="evenodd"
-    //                   d="M4 4a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V11a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z"
-    //                   clipRule="evenodd"
-    //                 />
-    //               </svg>
-    //             </div>
-    //             <div>
-    //               <p className="text-xs text-blue-600 uppercase tracking-wide">
-    //                 Price
-    //               </p>
-    //               <p className="font-bold text-lg">{fossilData?.sell} Bayas</p>
-    //             </div>
-    //           </div>
-    //         </div>
-
-    //         <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-    //           <div className="flex items-center">
-    //             <div className="p-2 bg-blue-100 rounded-lg mr-3">
-    //               <svg
-    //                 xmlns="http://www.w3.org/2000/svg"
-    //                 className="h-5 w-5 text-blue-700"
-    //                 viewBox="0 0 20 20"
-    //                 fill="currentColor"
-    //               >
-    //                 <path
-    //                   fillRule="evenodd"
-    //                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L10.586 10.586l-2.121 2.121a1 1 0 001.414 1.414l2.829-2.829V7.586z"
-    //                   clipRule="evenodd"
-    //                 />
-    //               </svg>
-    //             </div>
-    //             <div>
-    //               <p className="text-xs text-blue-600 uppercase tracking-wide">
-    //                 TAMAÑO
-    //               </p>
-    //               <p className="font-bold text-lg">
-    //                 {fossilData?.length} x {fossilData?.width}
-    //               </p>
-    //             </div>
-    //           </div>
-    //         </div>
-
-    //         <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-    //           <div className="flex items-center">
-    //             <div className="p-2 bg-blue-100 rounded-lg mr-3">
-    //               <svg
-    //                 xmlns="http://www.w3.org/2000/svg"
-    //                 className="h-5 w-5 text-blue-700"
-    //                 viewBox="0 0 20 20"
-    //                 fill="currentColor"
-    //               >
-    //                 <path
-    //                   fillRule="evenodd"
-    //                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L10.586 10.586l-2.121 2.121a1 1 0 001.414 1.414l2.829-2.829V7.586z"
-    //                   clipRule="evenodd"
-    //                 />
-    //               </svg>
-    //             </div>
-    //             <div>
-    //               <p className="text-xs text-blue-600 uppercase tracking-wide">
-    //                 AAD
-    //               </p>
-    //               <p className="font-bold text-lg">{fossilData?.hha_base}</p>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-
-    //       {/* Other Saltwater Fish */}
-    //       <div>
-    //         <div className="flex justify-between items-center mb-3">
-    //           <h3 className="font-bold text-gray-900">Otros fósiles</h3>
-    //           <button className="text-blue-600 text-sm font-medium hover:text-blue-700 flex items-center">
-    //             Otros fósiles
-    //             <svg
-    //               xmlns="http://www.w3.org/2000/svg"
-    //               className="h-4 w-4 ml-1"
-    //               viewBox="0 0 20 20"
-    //               fill="currentColor"
-    //             >
-    //               <path
-    //                 fillRule="evenodd"
-    //                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-    //                 clipRule="evenodd"
-    //               />
-    //             </svg>
-    //           </button>
-    //         </div>
-
-    //         {/* Grid responsive: 1 col (mobile), 2 cols (tablet), 3 cols (desktop+) */}
-    //         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    //           {randomFossils.map((random) => (
-    //             <div
-    //               key={random.name}
-    //               className="bg-white rounded-xl overflow shadow-sm hover:shadow-md transition-shadow"
-    //             >
-    //               <div className="aspect-square bg-gray-100 flex items-center justify-center">
-    //                 <img
-    //                   src={random.image_url}
-    //                   alt={random.name}
-    //                   className="w-full h-full object-cover"
-    //                 />
-    //               </div>
-    //               <div className="p-3">
-    //                 <p className="font-medium text-gray-800 text-sm truncate">
-    //                   {random.name}
-    //                 </p>
-    //                 <p className="text-xs text-gray-500">{random.sell}</p>
-    //               </div>
-    //             </div>
-    //           ))}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-
-    //   {/* Footer spacer */}
-    //   <div className="h-8"></div>
-    // </div>
-
-    <div>
+    <div className="max-w-4xl mx-auto h-screen py-6 md:py-10">
       {/* Header */}
-      <div className="max-w-4xl mx-auto px-4 pt-6">
-        <div className="flex justify-between items-start"></div>
+      <div className="flex items-center gap-3 mb-6">
+        <Link
+          to={`/${itemCategory}`}
+          className="p-2 rounded-lg  hover:bg-muted/80 transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+        </Link>
+        {/* font-display text-2xl md:text-3xl font-black font-acnh-title */}
+        <span className="font-display text-xl text-muted-foreground font-acnh-title">
+          {displayCategory} /
+        </span>
+        <span className="font-display font-bold text-foreground capitalize">
+          {fossilData?.name}
+        </span>
       </div>
 
       {/* Main Card */}

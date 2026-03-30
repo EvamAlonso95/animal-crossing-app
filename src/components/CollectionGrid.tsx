@@ -25,7 +25,7 @@ export const CollectionGrid = () => {
   const totalItemsMap = useGetTotalItems();
 
   return (
-    <div className=" py-8 md:py-12 flex justify-center items-center flex-col">
+    <div className=" py-8 md:py-12 flex justify-center items-center flex-col h-screen">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

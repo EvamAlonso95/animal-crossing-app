@@ -4,7 +4,7 @@ import Header from "../components/Common/Header";
 
 export const AnimalCrossingLayout = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen">
       <Header />
       <Outlet />
       <Footer />

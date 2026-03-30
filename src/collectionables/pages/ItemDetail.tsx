@@ -1,5 +1,5 @@
 import { useParams } from "react-router";
-import { useFossilInfo } from "../hooks/useFossilInfo";
+import { useFossilInfo } from "../fossils/hooks/useFossilInfo";
 
 export const ItemDetail = () => {
   const { fossilname } = useParams<{ fossilname: string }>();
@@ -65,7 +65,7 @@ export const ItemDetail = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto bg-gray-50 min-h-screen pb-8">
+    <div className="max-w-4xl mx-auto bg-gray-50 h-screen pb-8">
       {/* Header */}
       <div className="bg-white px-4 py-5 border-b border-gray-200">
         <div className="flex items-center justify-between">
