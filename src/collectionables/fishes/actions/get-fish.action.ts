@@ -2,9 +2,7 @@ import { AnimalCrossingApi } from "@/collectionables/api/animalCrossing.api";
 import type { Fish } from "@/collectionables/types/fish.interface";
 
 export const getFishAction = async (fishname: string): Promise<Fish> => {
-  const { data } = await AnimalCrossingApi.get<Fish>(
-    `/fossils/individuals/${fishname}`,
-  );
+  const { data } = await AnimalCrossingApi.get<Fish>(`/fish/${fishname}`);
 
   return data;
 };

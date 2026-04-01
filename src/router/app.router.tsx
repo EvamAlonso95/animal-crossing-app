@@ -1,4 +1,4 @@
-import { FossilPage } from "@/collectionables/fossils/page/FossilPage";
+import { ItemDetailRouter } from "@/router/ItemDetailRouter";
 import { AnimalCrossingLayout } from "@/collectionables/layouts/AnimalCrossingLayout";
 import { CollectionList } from "@/collectionables/pages/CollectionList";
 import { HomePage } from "@/collectionables/pages/Home";
@@ -15,12 +15,12 @@ export const appRouter = createBrowserRouter([
       },
 
       {
-        path: ":itemCategory", //Le ponemos el nombre a la variable que pasará por ahi
+        path: ":itemCategory",
         element: <CollectionList />,
       },
       {
-        path: ":itemCategory/:item", //Le ponemos el nombre a la variable que pasará por ahi
-        element: <FossilPage />,
+        path: ":itemCategory/:item",
+        element: <ItemDetailRouter />,
       },
 
       {
