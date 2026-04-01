@@ -1,23 +1,26 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
-import { useRandomFossils } from "../hooks/useRandomFossils";
-import { useAllFossils } from "../hooks/useAllFossils";
-import { useFossilInfo } from "../hooks/useFossilInfo";
+
 import { ArrowLeft, Coins, Grid2x2, Landmark, Origami } from "lucide-react";
 import { useGetcategoryNameEsp } from "@/collectionables/hooks/useGetcategoryNameEsp";
 import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
+import { useFossilInfo } from "../fossils/hooks/useFossilInfo";
+import { useAllFossils } from "../fossils/hooks/useAllFossils";
+import { useRandomFossils } from "../fossils/hooks/useRandomFossils";
+import { useGetCategory } from "../hooks/useGetCategory";
 // import { useFossilInfo } from "../hooks/useFossilInfo";
 
-export const FossilPage = () => {
-  const { itemCategory, item: fossilName } = useParams<{
+export const Item = () => {
+  const { itemCategory, item: itemName } = useParams<{
     itemCategory: string;
     item: string;
   }>();
 
-  console.log(fossilName, "Fossil Page");
+  useGetCategory(itemCategory ?? "", itemName ?? "");
+  console.log("Item Page estoy en ", itemCategory, "/", itemName);
 
   const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
-  const { data: itemData, isLoading } = useFossilInfo(fossilName ?? "");
+  const { data: itemData, isLoading } = useFossilInfo(itemName ?? "");
   const { data: fossils = [] } = useAllFossils();
   const [seed, setSeed] = useState(0);
   const randomFossils = useRandomFossils(fossils, seed);
@@ -55,7 +58,7 @@ export const FossilPage = () => {
             {/* Left: Fossil Image & Action */}
             <div className="lg:col-span-1 flex flex-col items-center justify-between">
               <h1 className="text-2xl font-bold text-gray-900 mb-3 capitalize text-center">
-                {fossilName}
+                {itemName}
               </h1>
               <div className="w-64 h-64 rounded-2xl bg-gradient-to-br from-amber-50 to-amber-100 flex items-center justify-center overflow-hidden shadow-inner bg-cover relative">
                 {isLoading ? (

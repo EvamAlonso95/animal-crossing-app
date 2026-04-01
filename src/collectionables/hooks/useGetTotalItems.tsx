@@ -2,8 +2,9 @@ import { useAllCollectionables } from "./useAllCollectionables";
 import { getAllFossilAction } from "../fossils/actions/get-all-fossils.action";
 import { getAllFishesAction } from "../fishes/actions/get-all-fishess.action";
 import { getAllBugsAction } from "../bugs/actions/get-all-bugs.action";
-import { getAllMollusksAction } from "../mollusks/action/get-all-fishess.action";
+
 import type { Category } from "../types/categories.interface";
+import { getAllMollusksAction } from "../mollusks/action/get-all-mollusks.action";
 
 export const useGetTotalItems = () => {
   const { data: fossils = [] } = useAllCollectionables(
