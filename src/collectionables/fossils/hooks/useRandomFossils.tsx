@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import type { Fossil } from "../../types/fossil.interface";
 
 // Hook personalizado para seleccionar 3 fósiles aleatorios
-export const useRandomFossils = (fossils: Fossil[]) => {
+export const useRandomFossils = (fossils: Fossil[], seed: number = 0) => {
   return useMemo(() => {
     if (fossils.length < 3) return fossils; // Si hay menos de 3, devuelve todos
 
@@ -15,5 +15,5 @@ export const useRandomFossils = (fossils: Fossil[]) => {
     }
 
     return selected;
-  }, [fossils]); // Se recalcula solo si fossils cambia
+  }, [fossils, seed]); // Se recalcula si fossils o seed cambia
 };

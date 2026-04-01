@@ -25,7 +25,7 @@ export const CollectionGrid = () => {
   const totalItemsMap = useGetTotalItems();
 
   return (
-    <div className=" py-8 md:py-12 flex justify-center items-center flex-col h-screen">
+    <div className="font-acnh-title py-8 md:py-12 flex justify-center items-center flex-col h-screen">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ export const CollectionGrid = () => {
       >
         <div className="flex items-center justify-center gap-2 mb-3">
           <Leaf className="h-8 w-8 text-lime-600 animate-leaf-float" />
-          <h1 className="font-display text-3xl md:text-4xl font-black text-foreground">
+          <h1 className=" text-3xl md:text-4xl font-black ">
             Museo de <span className="text-lime-600">Animal Crossing</span>
           </h1>
           <Leaf

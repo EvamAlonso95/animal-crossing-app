@@ -41,7 +41,7 @@ export const CollectionCard = ({
         >
           <img className="drop-shadow-xl" src={image} />
 
-          <h2 className="font-display text-xl font-bold text-zinc-900 font-acnh-text: mb-1">
+          <h2 className=" text-xl font-bold text-zinc-900 font-acnh-text: mb-1">
             {categoryLabels[category]}
           </h2>
           <p className="text-sm text-muted-foreground font-body">
