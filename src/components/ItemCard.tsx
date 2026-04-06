@@ -1,13 +1,12 @@
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
+import { getFossilAction } from "@/collectionables/fossils/actions/get-fossil.action";
 import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
 import { useNavigate } from "react-router";
 
 import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
 
 import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
-
-// const ITEMS_PER_PAGE = 20;
 
 interface Collectionable {
   name: string;
@@ -16,9 +15,13 @@ interface Collectionable {
 
 interface Props {
   itemCategory: string;
+  searchQuery?: string;
 }
 
-const actionMap: Record<string, () => Promise<Collectionable[]>> = {
+const actionMap: Record<
+  string,
+  (searchQuery?: string) => Promise<Collectionable[]>
+> = {
   fossils: getAllFossilAction,
   fishes: getAllFishesAction,
   bugs: getAllBugsAction,
@@ -31,13 +34,18 @@ const categoryColors: Record<string, { outer: string; inner: string }> = {
   sea: { outer: "bg-blue-100", inner: "bg-blue-50" },
 };
 
-export const ItemCard = ({ itemCategory }: Props) => {
+export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
   const navigate = useNavigate();
 
-  const queryFn = actionMap[itemCategory] ?? (() => Promise.resolve([]));
+  const action = actionMap[itemCategory] ?? (() => Promise.resolve([]));
+
+  const queryFn =
+    itemCategory === "fossils" && searchQuery
+      ? () => getFossilAction(searchQuery).then((fossil) => [fossil])
+      : () => action(searchQuery);
 
   const { data: items = [], isLoading } = useAllCollectionables(
-    itemCategory,
+    `${itemCategory}-${searchQuery}`,
     queryFn,
   );
 
