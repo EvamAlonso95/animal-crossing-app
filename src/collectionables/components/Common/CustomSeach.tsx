@@ -13,6 +13,7 @@ export const CustomSeach = () => {
 
     const value = inputRef.current?.value ?? "";
     setSearchParams(value ? { query: value } : {});
+    if (inputRef.current) inputRef.current.value = "";
   };
   return (
     <>

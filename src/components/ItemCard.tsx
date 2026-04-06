@@ -1,10 +1,13 @@
+import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
+import { getBugAction } from "@/collectionables/bugs/actions/get-bug.action";
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
+import { getFishAction } from "@/collectionables/fishes/actions/get-fish.action";
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
 import { getFossilAction } from "@/collectionables/fossils/actions/get-fossil.action";
+import { getAllMollusksAction } from "@/collectionables/mollusks/action/get-all-mollusks.action";
+import { getBugAction as getMolluskAction } from "@/collectionables/mollusks/action/get-mollusk.action";
 import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
 import { useNavigate } from "react-router";
-
-import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
 
 import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
 
@@ -25,6 +28,16 @@ const actionMap: Record<
   fossils: getAllFossilAction,
   fishes: getAllFishesAction,
   bugs: getAllBugsAction,
+  sea: getAllMollusksAction,
+};
+
+const singleActionMap: Partial<
+  Record<string, (name: string) => Promise<Collectionable>>
+> = {
+  fossils: getFossilAction,
+  fishes: getFishAction,
+  bugs: getBugAction,
+  sea: getMolluskAction,
 };
 
 const categoryColors: Record<string, { outer: string; inner: string }> = {
@@ -38,10 +51,11 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
   const navigate = useNavigate();
 
   const action = actionMap[itemCategory] ?? (() => Promise.resolve([]));
+  const singleAction = singleActionMap[itemCategory];
 
   const queryFn =
-    itemCategory === "fossils" && searchQuery
-      ? () => getFossilAction(searchQuery).then((fossil) => [fossil])
+    singleAction && searchQuery
+      ? () => singleAction(searchQuery).then((item) => [item])
       : () => action(searchQuery);
 
   const { data: items = [], isLoading } = useAllCollectionables(
@@ -59,6 +73,15 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
   };
 
   if (isLoading) return <CustomFullScreenLoading />;
+
+  if (items.length === 0 && searchQuery) {
+    return (
+      <span className="text-muted-foreground font-body text-sm">
+        No hay coincidencias para &quot;{searchQuery}&quot;
+      </span>
+    );
+  }
+
   return (
     <>
       {items.map((item) => (
