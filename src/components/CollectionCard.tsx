@@ -1,4 +1,5 @@
 import {
+  categoryBgClasses,
   categoryLabels,
   type Category,
 } from "@/collectionables/types/categories.interface";
@@ -14,12 +15,6 @@ export interface CardProps {
   totalItems: number;
 }
 
-const bgClasses: Record<Category, string> = {
-  fossils: "bg-pink-400/20",
-  fishes: "bg-cyan-300/20",
-  bugs: "bg-amber-900/20",
-  sea: "bg-blue-700/20",
-};
 
 export const CollectionCard = ({
   image,
@@ -37,7 +32,7 @@ export const CollectionCard = ({
       <Link to={href} className="block group">
         <div
           className={`relative overflow-hidden rounded-2xl border-none p-6 transition-all duration-300
-            shadow-card hover:shadow-card-hover hover:-translate-y-1 ${bgClasses[category]}`}
+            shadow-card hover:shadow-card-hover hover:-translate-y-1 ${categoryBgClasses[category]}`}
         >
           <img className="drop-shadow-xl" src={image} />
 
