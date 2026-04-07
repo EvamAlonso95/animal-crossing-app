@@ -46,7 +46,7 @@ export const FossilPage = () => {
           {itemData?.name}
         </span>
       </div>
-
+      
       {/* Main Card */}
       <div className="max-w-4xl mx-auto px-4 mt-6 font-acnh-title">
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">

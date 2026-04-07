@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router";
 
-import { ArrowLeft, Coins, Grid2x2, HousePlus, Origami } from "lucide-react";
+import {
+  ArrowLeft,
+  Coins,
+  Grid2x2,
+  Heart,
+  HeartOff,
+  HousePlus,
+  Origami,
+} from "lucide-react";
 import {
   categoryBgClasses,
   type Category,
@@ -18,6 +26,8 @@ import { useAllFossils } from "../fossils/hooks/useAllFossils";
 import { useRandomFossils } from "../fossils/hooks/useRandomFossils";
 import { useGetCategory } from "../hooks/useGetCategory";
 import { motion } from "framer-motion";
+import { useMuseum } from "../context/MusseumContext";
+import type { Collectionable } from "../types/collectionable.interface";
 
 export const Item = () => {
   const { itemCategory, item: itemName } = useParams<{
@@ -39,6 +49,21 @@ export const Item = () => {
   };
 
   console.log({ itemData });
+
+  const { isMusseum, toggleMusseum } = useMuseum();
+
+  const handleClickAddToMusseum = () => {
+    if (!itemData) return;
+    const collectionable: Collectionable = {
+      name: itemData.name,
+      url: itemData.url,
+      image_url: itemData.image_url,
+      category: "fossils",
+    };
+    toggleMusseum(collectionable);
+
+    console.log("Añadido");
+  };
 
   return (
     <div className="max-w-4xl mx-auto h-screen py-6 md:py-10">
@@ -91,12 +116,21 @@ export const Item = () => {
                   )}
                   <Tooltip>
                     <TooltipTrigger asChild>
-                      <button className="absolute bottom-3 right-3 cursor-pointer bg-lime-600 text-white p-2.5 rounded-full shadow-lg hover:shadow-xl hover:bg-lime-500 transition-all transform hover:-translate-y-0.5">
-                        <HousePlus className="h-5 w-5" />
+                      <button
+                        className={`absolute bottom-3 right-3 cursor-pointer p-2.5 rounded-full shadow-lg transition-all transform ${isMusseum(itemName ?? "") ? "bg-red-400 hover:bg-red-500" : "bg-lime-600 hover:bg-lime-500 hover:shadow-xl hover:-translate-y-0.5"} text-white`}
+                        onClick={() => handleClickAddToMusseum()}
+                      >
+                        {isMusseum(itemName ?? "") ? (
+                          <HeartOff className="h-5 w-5" />
+                        ) : (
+                          <Heart className="h-5 w-5" />
+                        )}
                       </button>
                     </TooltipTrigger>
                     <TooltipContent className="text-white">
-                      Añadir al museo
+                      {isMusseum(itemName ?? "")
+                        ? "Quitar del museo"
+                        : "Añadir al museo"}
                     </TooltipContent>
                   </Tooltip>
                 </div>

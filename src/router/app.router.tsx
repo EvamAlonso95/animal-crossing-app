@@ -1,6 +1,7 @@
 import { AnimalCrossingLayout } from "@/collectionables/layouts/AnimalCrossingLayout";
 import { CollectionList } from "@/collectionables/pages/CollectionList";
 import { HomePage } from "@/collectionables/pages/Home";
+import { MusseumPage } from "@/collectionables/pages/MusseumPage";
 import { createBrowserRouter, Navigate } from "react-router";
 import { Item } from "@/collectionables/pages/Item";
 
@@ -13,7 +14,10 @@ export const appRouter = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
-
+      {
+        path: "musseum",
+        element: <MusseumPage />,
+      },
       {
         path: ":itemCategory",
         element: <CollectionList />,
