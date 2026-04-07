@@ -1,11 +1,7 @@
 import { getAllBugsAction } from "@/collectionables/bugs/actions/get-all-bugs.action";
-import { getBugAction } from "@/collectionables/bugs/actions/get-bug.action";
 import { getAllFishesAction } from "@/collectionables/fishes/actions/get-all-fishess.action";
-import { getFishAction } from "@/collectionables/fishes/actions/get-fish.action";
 import { getAllFossilAction } from "@/collectionables/fossils/actions/get-all-fossils.action";
-import { getFossilAction } from "@/collectionables/fossils/actions/get-fossil.action";
 import { getAllMollusksAction } from "@/collectionables/mollusks/action/get-all-mollusks.action";
-import { getBugAction as getMolluskAction } from "@/collectionables/mollusks/action/get-mollusk.action";
 import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectionables";
 import { useNavigate } from "react-router";
 
@@ -21,23 +17,11 @@ interface Props {
   searchQuery?: string;
 }
 
-const actionMap: Record<
-  string,
-  (searchQuery?: string) => Promise<Collectionable[]>
-> = {
+const actionMap: Record<string, () => Promise<Collectionable[]>> = {
   fossils: getAllFossilAction,
   fishes: getAllFishesAction,
   bugs: getAllBugsAction,
   sea: getAllMollusksAction,
-};
-
-const singleActionMap: Partial<
-  Record<string, (name: string) => Promise<Collectionable>>
-> = {
-  fossils: getFossilAction,
-  fishes: getFishAction,
-  bugs: getBugAction,
-  sea: getMolluskAction,
 };
 
 const categoryColors: Record<string, { outer: string; inner: string }> = {
@@ -51,17 +35,17 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
   const navigate = useNavigate();
 
   const action = actionMap[itemCategory] ?? (() => Promise.resolve([]));
-  const singleAction = singleActionMap[itemCategory];
 
-  const queryFn =
-    singleAction && searchQuery
-      ? () => singleAction(searchQuery).then((item) => [item])
-      : () => action(searchQuery);
-
-  const { data: items = [], isLoading } = useAllCollectionables(
-    `${itemCategory}-${searchQuery}`,
-    queryFn,
+  const { data: allItems = [], isLoading } = useAllCollectionables(
+    itemCategory,
+    action,
   );
+
+  const items = searchQuery
+    ? allItems.filter((item) =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()),
+      )
+    : allItems;
 
   const colors = categoryColors[itemCategory] ?? {
     outer: "bg-stone-100",

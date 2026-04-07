@@ -7,7 +7,6 @@ import {
   Grid2x2,
   Heart,
   HeartOff,
-  HousePlus,
   Origami,
 } from "lucide-react";
 import {
