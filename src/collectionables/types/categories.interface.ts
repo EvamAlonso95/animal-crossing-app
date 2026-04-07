@@ -1,10 +1,11 @@
-export type Category = "fossils" | "fishes" | "bugs" | "sea";
+export type Category = "fossils" | "fishes" | "bugs" | "sea" | "musseum";
 
 export const categoryLabels: Record<Category, string> = {
   fossils: "Fósiles",
   fishes: "Peces",
   bugs: "Insectos",
   sea: "Moluscos",
+  musseum: "Museo",
 };
 
 export const categoryIcons: Record<Category, string> = {
@@ -12,6 +13,7 @@ export const categoryIcons: Record<Category, string> = {
   fishes: "🐟",
   bugs: "🦋",
   sea: "🐚",
+  musseum: "🏛",
 };
 
 export const categoryBgClasses: Record<Category, string> = {
@@ -19,4 +21,5 @@ export const categoryBgClasses: Record<Category, string> = {
   fishes: "bg-cyan-300/20",
   bugs: "bg-amber-900/20",
   sea: "bg-blue-700/20",
+  musseum: "bg-green-300/20",
 };

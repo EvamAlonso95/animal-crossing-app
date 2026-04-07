@@ -12,7 +12,9 @@ export const useGetcategoryNameEsp = (itemCategory: string) => {
           ? "Bichos"
           : itemCategory === "sea"
             ? "Moluscos"
-            : itemCategory;
+            : itemCategory === "musseum"
+              ? "Museo"
+              : itemCategory;
 
   return displayName;
 };

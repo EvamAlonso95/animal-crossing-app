@@ -3,6 +3,7 @@ import fossil from "../assets/img/Fossil_NH_Icon.png";
 import fish from "../assets/img/Fish_NH_Icon.png";
 import bug from "../assets/img/Bug_NH_Icon.png";
 import mollusks from "../assets/img/Sea_Creature_NH_Icon.png";
+import musseum from "../assets/img/musseum.png";
 import { Leaf } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Category } from "@/collectionables/types/categories.interface";
@@ -19,6 +20,7 @@ const cardsImg: {
   { id: 2, image: fish, href: "/fishes", category: "fishes" },
   { id: 3, image: bug, href: "/bugs", category: "bugs" },
   { id: 4, image: mollusks, href: "/sea", category: "sea" },
+  { id: 5, image: musseum, href: "/musseum", category: "musseum" },
 ];
 
 export const CollectionGrid = () => {
@@ -46,7 +48,7 @@ export const CollectionGrid = () => {
           fósiles y criaturas marinas.
         </p>
       </motion.div>
-      <div className="flex gap-3 mb-3">
+      <div className="flex gap-3 mb-3 items-stretch">
         {cardsImg.map((card, index) => (
           <CollectionCard
             key={card.id}

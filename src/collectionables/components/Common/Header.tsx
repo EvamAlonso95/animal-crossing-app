@@ -3,7 +3,7 @@ import { categoryLabels } from "@/collectionables/types/categories.interface";
 import { Leaf } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
-const categories: Category[] = ["fossils", "fishes", "bugs", "sea"];
+const categories: Category[] = ["fossils", "fishes", "bugs", "sea", "musseum"];
 
 export default function Header() {
   const location = useLocation();
