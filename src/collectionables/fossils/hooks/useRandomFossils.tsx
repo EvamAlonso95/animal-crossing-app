@@ -1,19 +1,39 @@
 import { useMemo } from "react";
-import type { Fossil } from "../../types/fossil.interface";
+import type {
+  Fossil,
+  FossilGroup,
+  FossilGroupItem,
+} from "../../types/fossil.interface";
 
-// Hook personalizado para seleccionar 3 fósiles aleatorios
-export const useRandomFossils = (fossils: Fossil[], seed: number = 0) => {
+function seededShuffle<T>(arr: T[], seed: number): T[] {
+  const shuffled = [...arr];
+  let s = seed === 0 ? 1 : seed;
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    s = (s * 1664525 + 1013904223) & 0x7fffffff;
+    const j = s % (i + 1);
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Hook personalizado para seleccionar fósiles relacionados o 3 aleatorios
+export const useRandomFossils = (
+  fossils: Fossil[],
+  groups: FossilGroup[],
+  currentFossilName: string,
+  seed: number = 0,
+): (Fossil | FossilGroupItem)[] => {
   return useMemo(() => {
-    if (fossils.length < 3) return fossils; // Si hay menos de 3, devuelve todos
+    const group = groups.find((g) =>
+      g.fossils.some((f) => f.name === currentFossilName),
+    );
 
-    const shuffled = [...fossils]; // Copia el array para no mutar el original
-    const selected = [];
-
-    for (let i = 0; i < 3; i++) {
-      const randomIndex = Math.floor(Math.random() * shuffled.length);
-      selected.push(shuffled.splice(randomIndex, 1)[0]); // Remueve y agrega el elemento
+    if (group) {
+      return group.fossils.filter((f) => f.name !== currentFossilName);
     }
 
-    return selected;
-  }, [fossils, seed]); // Se recalcula si fossils o seed cambia
+    // Fósil individual: selecciona 3 aleatorios usando seed determinista
+    const pool = fossils.filter((f) => f.name !== currentFossilName);
+    return seededShuffle(pool, seed).slice(0, 3);
+  }, [fossils, groups, currentFossilName, seed]);
 };

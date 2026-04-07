@@ -6,6 +6,7 @@ import { useAllCollectionables } from "@/collectionables/hooks/useAllCollectiona
 import { useNavigate } from "react-router";
 
 import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
+import { Item } from "@/collectionables/pages/Item";
 
 interface Collectionable {
   name: string;
@@ -66,6 +67,7 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
     );
   }
 
+  console.log(items);
   return (
     <>
       {items.map((item) => (

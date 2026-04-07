@@ -20,10 +20,11 @@ import {
 } from "@/components/ui/tooltip";
 import { useGetcategoryNameEsp } from "@/collectionables/hooks/useGetcategoryNameEsp";
 import { CustomFullScreenLoading } from "@/collectionables/components/Common/CustomFullScreenLoading";
-import { useFossilInfo } from "../fossils/hooks/useFossilInfo";
 import { useAllFossils } from "../fossils/hooks/useAllFossils";
+import { useAllFossilGroups } from "../fossils/hooks/useAllFossilGroups";
 import { useRandomFossils } from "../fossils/hooks/useRandomFossils";
 import { useGetCategory } from "../hooks/useGetCategory";
+import type { Fossil } from "../types/fossil.interface";
 import { motion } from "framer-motion";
 import { useMuseum } from "../context/MusseumContext";
 import type { Collectionable } from "../types/collectionable.interface";
@@ -34,14 +35,18 @@ export const Item = () => {
     item: string;
   }>();
 
-  useGetCategory(itemCategory ?? "", itemName ?? "");
   console.log("Item Page estoy en ", itemCategory, "/", itemName);
 
   const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
-  const { data: itemData, isLoading } = useFossilInfo(itemName ?? "");
+  const { data: rawData, isLoading } = useGetCategory(
+    itemCategory ?? "",
+    itemName ?? "",
+  );
+  const itemData = rawData as Fossil | undefined;
   const { data: fossils = [] } = useAllFossils();
+  const { data: groups = [] } = useAllFossilGroups();
   const [seed, setSeed] = useState(0);
-  const randomFossils = useRandomFossils(fossils, seed);
+  const randomFossils = useRandomFossils(fossils, groups, itemName ?? "", seed);
 
   const handleClickRefreshRandomFossils = () => {
     setSeed((prev) => prev + 1);
@@ -57,7 +62,7 @@ export const Item = () => {
       name: itemData.name,
       url: itemData.url,
       image_url: itemData.image_url,
-      category: "fossils",
+      category: (itemCategory ?? "fossils") as Collectionable["category"],
     };
     toggleMusseum(collectionable);
 

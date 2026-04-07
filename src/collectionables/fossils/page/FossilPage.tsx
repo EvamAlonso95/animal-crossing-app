@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router";
 import { useRandomFossils } from "../hooks/useRandomFossils";
 import { useAllFossils } from "../hooks/useAllFossils";
+import { useAllFossilGroups } from "../hooks/useAllFossilGroups";
 import { useFossilInfo } from "../hooks/useFossilInfo";
 import { ArrowLeft, Coins, Grid2x2, Landmark, Origami } from "lucide-react";
 import { useGetcategoryNameEsp } from "@/collectionables/hooks/useGetcategoryNameEsp";
@@ -19,8 +20,14 @@ export const FossilPage = () => {
   const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
   const { data: itemData, isLoading } = useFossilInfo(fossilName ?? "");
   const { data: fossils = [] } = useAllFossils();
+  const { data: groups = [] } = useAllFossilGroups();
   const [seed, setSeed] = useState(0);
-  const randomFossils = useRandomFossils(fossils, seed);
+  const randomFossils = useRandomFossils(
+    fossils,
+    groups,
+    fossilName ?? "",
+    seed,
+  );
 
   const handleClickRefreshRandomFossils = () => {
     setSeed((prev) => prev + 1);
@@ -46,7 +53,7 @@ export const FossilPage = () => {
           {itemData?.name}
         </span>
       </div>
-      
+
       {/* Main Card */}
       <div className="max-w-4xl mx-auto px-4 mt-6 font-acnh-title">
         <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">

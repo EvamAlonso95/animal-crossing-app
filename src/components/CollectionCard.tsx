@@ -38,13 +38,13 @@ export const CollectionCard = ({
             className="drop-shadow-xl w-36 h-36 object-contain"
             src={image}
           />
-
           <h2 className=" text-xl font-bold text-zinc-900 font-acnh-text: mb-1">
             {categoryLabels[category]}
           </h2>
           <p className="text-sm text-muted-foreground font-body">
             {totalItems ?? 0} elementos
           </p>
+
           <ArrowRight className="absolute bottom-5 right-5 h-5 w-5 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
         </div>
       </Link>
