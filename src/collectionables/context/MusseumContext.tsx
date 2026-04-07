@@ -1,4 +1,10 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import type { Collectionable } from "../types/collectionable.interface";
 
 interface MusseumContextType {
@@ -10,8 +16,15 @@ interface MusseumContextType {
 
 const MusseumContext = createContext<MusseumContextType | null>(null);
 
+const getMusseumItemsFromLocalStorage = (): Collectionable[] => {
+  const itemsMusseum = localStorage.getItem("itemsMusseum");
+  return itemsMusseum ? JSON.parse(itemsMusseum) : [];
+};
+
 export function MusseumProvider({ children }: { children: React.ReactNode }) {
-  const [musseum, setMusseum] = useState<Collectionable[]>([]);
+  const [musseum, setMusseum] = useState<Collectionable[]>(
+    getMusseumItemsFromLocalStorage(),
+  );
 
   const isMusseum = useCallback(
     (name: string) => musseum.some((item) => item.name === name),
@@ -25,6 +38,10 @@ export function MusseumProvider({ children }: { children: React.ReactNode }) {
         : [...prev, item],
     );
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("itemsMusseum", JSON.stringify(musseum));
+  }, [musseum]);
 
   return (
     <MusseumContext.Provider
