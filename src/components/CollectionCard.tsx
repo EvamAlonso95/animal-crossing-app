@@ -32,7 +32,7 @@ export const CollectionCard = ({
       <Link to={href} className="block group">
         <div
           className={`relative overflow-hidden rounded-2xl border-none p-6 transition-all duration-300 h-full
-            shadow-card hover:shadow-card-hover hover:-translate-y-1 ${categoryBgClasses[category]}`}
+            shadow-card hover:shadow-card-hover hover:-translate-y-1 ${categoryBgClasses[category]?.outer}`}
         >
           <img
             className="drop-shadow-xl w-36 h-36 object-contain"

@@ -95,7 +95,7 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
             src={item.image_url}
             alt={item.name}
           />
-          <p className="mt-1 font-acnh-title font-bold text-slate-700">
+          <p className="mt-1 font-acnh-title font-bold text-slate-700 capitalize">
             {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
           </p>
         </div>

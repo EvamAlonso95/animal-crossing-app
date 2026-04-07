@@ -16,10 +16,15 @@ export const categoryIcons: Record<Category, string> = {
   musseum: "🏛",
 };
 
-export const categoryBgClasses: Record<Category, string> = {
-  fossils: "bg-pink-400/20",
-  fishes: "bg-cyan-300/20",
-  bugs: "bg-amber-900/20",
-  sea: "bg-blue-700/20",
-  musseum: "bg-green-300/20",
+export interface CategoryColors {
+  outer: string;
+  inner: string;
+}
+
+export const categoryBgClasses: Record<string, CategoryColors> = {
+  fossils: { outer: "bg-pink-100", inner: "bg-pink-50" },
+  fishes: { outer: "bg-cyan-100", inner: "bg-cyan-50" },
+  bugs: { outer: "bg-amber-100", inner: "bg-amber-50" },
+  sea: { outer: "bg-blue-100", inner: "bg-blue-50" },
+  musseum: { outer: "bg-green-100", inner: "" },
 };

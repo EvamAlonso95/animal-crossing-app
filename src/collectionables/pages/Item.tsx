@@ -93,7 +93,7 @@ export const Item = () => {
         {/* Main Card */}
         <div className="max-w-4xl mx-auto px-4 mt-6 font-acnh-title">
           <div
-            className={`${categoryBgClasses[itemCategory as Category]} rounded-3xl shadow-xl overflow-hidden border border-gray-100`}
+            className={`${categoryBgClasses[itemCategory as Category]?.outer} rounded-3xl shadow-xl overflow-hidden border border-gray-100`}
           >
             {/* Top Row: Image + Stats */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6">
