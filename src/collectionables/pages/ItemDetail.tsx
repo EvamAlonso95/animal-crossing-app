@@ -4,11 +4,7 @@ import { useFossilInfo } from "../fossils/hooks/useFossilInfo";
 export const ItemDetail = () => {
   const { fossilname } = useParams<{ fossilname: string }>();
 
-  console.log({ fossilname });
-
   const { data: fossilData } = useFossilInfo(fossilname ?? "");
-
-  console.log({ fossilData });
 
   // Meses para la disponibilidad (abreviados)
   const months = [

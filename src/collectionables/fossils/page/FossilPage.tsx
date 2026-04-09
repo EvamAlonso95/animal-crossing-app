@@ -15,8 +15,6 @@ export const FossilPage = () => {
     item: string;
   }>();
 
-  console.log(fossilName, "Fossil Page");
-
   const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
   const { data: itemData, isLoading } = useFossilInfo(fossilName ?? "");
   const { data: fossils = [] } = useAllFossils();
@@ -32,8 +30,6 @@ export const FossilPage = () => {
   const handleClickRefreshRandomFossils = () => {
     setSeed((prev) => prev + 1);
   };
-
-  console.log({ itemData });
 
   return (
     <div className="max-w-4xl mx-auto h-screen py-6 md:py-10">

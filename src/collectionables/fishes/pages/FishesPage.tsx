@@ -11,8 +11,6 @@ export const FishesPage = () => {
     item: string;
   }>();
 
-  console.log(fishName, "Fish Page");
-
   const displayCategory = useGetcategoryNameEsp(itemCategory ?? "");
   const { data: fishData, isLoading } = useFishInfo(fishName ?? "");
   const { data: fishes = [] } = useAllFishes();
@@ -23,7 +21,6 @@ export const FishesPage = () => {
   //     setSeed((prev) => prev + 1);
   //   };
 
-  console.log({ fishData });
   return (
     <div className="container py-6 md:py-10">
       <div className="flex items-center gap-3 mb-6">

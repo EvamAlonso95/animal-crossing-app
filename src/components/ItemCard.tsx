@@ -67,7 +67,6 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
     );
   }
 
-  console.log(items);
   return (
     <>
       {items.map((item) => (

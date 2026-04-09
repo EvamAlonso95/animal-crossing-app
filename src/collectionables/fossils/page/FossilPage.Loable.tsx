@@ -18,7 +18,7 @@ export const FossilPageEva = () => {
   // const { data: fossils = [] } = useAllFossils();
   // const randomFossils = useRandomFossils(fossils);
 
-  console.log({ fossilData });
+  
 
   return (
     <div className="container py-6 md:py-10">
