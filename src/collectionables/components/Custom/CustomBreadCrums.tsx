@@ -14,7 +14,7 @@ export const CustomBreadCrums = () => {
         </Link>
         <h1 className="text-xl text-muted-foreground font-acnh-titlee">Home</h1>
       </div>
-      <div className="relative w-full">
+      <div className="relative w-90">
         <CustomSeach />
       </div>
     </div>
