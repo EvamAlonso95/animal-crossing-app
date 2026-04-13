@@ -72,7 +72,7 @@ export const ItemCard = ({ itemCategory, searchQuery = "" }: Props) => {
       {items.map((item) => (
         <div
           key={item.name}
-          className={`flex flex-col items-center justify-center cursor-pointer size-52 ${colors.outer} mb-1 rounded-3xl`}
+          className={`flex flex-col items-center justify-center cursor-pointer w-full aspect-square ${colors.outer} mb-1 rounded-3xl`}
           onClick={() => handleClick(item.name)}
         >
           <img

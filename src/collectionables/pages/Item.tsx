@@ -110,7 +110,7 @@ export const Item = () => {
   console.log({ itemData });
 
   return (
-    <div className="w-[80%] flex justify-center flex-col mx-auto">
+    <div className="w-full max-w-5xl px-4 sm:px-6 lg:px-8 mx-auto">
       <div className="flex items-center gap-3 mt-6">
         <Link
           to={`/${itemCategory}`}
@@ -126,7 +126,7 @@ export const Item = () => {
           {itemData?.name}
         </span>
       </div>
-      <div className="max-w-4xl mx-auto h-screen py-6 md:py-10">
+      <div className="max-w-4xl mx-auto py-6 md:py-10">
         {/* TODO - Refactorizar */}
 
         <motion.div

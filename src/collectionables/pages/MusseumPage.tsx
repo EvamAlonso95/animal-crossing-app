@@ -10,9 +10,9 @@ export const MusseumPage = () => {
   const { musseum, toggleMusseum } = useMuseum();
 
   return (
-    <div className="w-[80%] flex justify-center flex-col mx-auto">
+    <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
       <CustomBreadCrums categoryName={"Mi museo"} />
-      <div className="w-fit mx-auto flex flex-col">
+      <div className="w-full">
         {musseum.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-muted-foreground gap-4">
             <HousePlus className="h-16 w-16 opacity-20" />
@@ -22,7 +22,7 @@ export const MusseumPage = () => {
             </p>
           </div>
         ) : (
-          <div className="gap-8 mb-8 flex flex-wrap justify-around">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 mb-8">
             {musseum.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -33,7 +33,7 @@ export const MusseumPage = () => {
               >
                 <Link to={`/${item.category}/${item.name}`}>
                   <div
-                    className={`${categoryBgClasses[item.category as Category]?.outer} flex flex-col items-center justify-center cursor-pointer size-52 mb-1 rounded-3xl`}
+                    className={`${categoryBgClasses[item.category as Category]?.outer} flex flex-col items-center justify-center cursor-pointer w-full aspect-square mb-1 rounded-3xl`}
                   >
                     <img
                       src={item.image_url}

@@ -27,11 +27,11 @@ export const CollectionGrid = () => {
   const totalItemsMap = useGetTotalItems();
 
   return (
-    <div className="font-acnh-title py-8 md:py-12 flex justify-center items-center flex-col h-screen">
+    <div className="font-acnh-title py-8 md:py-12 flex justify-center items-center flex-col min-h-[calc(100vh-8rem)]">
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center mb-10"
+        className="text-center mb-10 px-4"
       >
         <div className="flex items-center justify-center gap-2 mb-3">
           <Leaf className="h-8 w-8 text-lime-600 animate-leaf-float" />
@@ -48,7 +48,7 @@ export const CollectionGrid = () => {
           fósiles y criaturas marinas.
         </p>
       </motion.div>
-      <div className="flex gap-3 mb-3 items-stretch">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 px-4 w-full max-w-4xl">
         {cardsImg.map((card, index) => (
           <CollectionCard
             key={card.id}
