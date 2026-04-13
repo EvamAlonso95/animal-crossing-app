@@ -29,7 +29,7 @@ export const appRouter = createBrowserRouter([
 
       {
         path: "*",
-        // element: <h2>Error 404</h2>
+
         element: <Navigate to={"/"} />,
       },
     ],

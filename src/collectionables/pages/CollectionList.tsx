@@ -1,8 +1,7 @@
+import { motion } from "framer-motion";
 import { ItemCard } from "@/components/ItemCard";
 import { useParams, useSearchParams } from "react-router";
 import { CustomBreadCrums } from "../components/Custom/CustomBreadCrums";
-import { useGetcategoryNameEsp } from "../hooks/useGetcategoryNameEsp";
-import { motion } from "framer-motion";
 
 export const CollectionList = () => {
   const { itemCategory } = useParams();

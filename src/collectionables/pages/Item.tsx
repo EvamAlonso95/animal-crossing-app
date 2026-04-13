@@ -91,7 +91,6 @@ export const Item = () => {
     translateShadowSize,
     translateMonths,
     translateTime,
-    translateWeather,
   } = useTranslateItemData();
 
   const handleClickAddToMusseum = () => {

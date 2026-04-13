@@ -1,73 +1,114 @@
-# React + TypeScript + Vite
+# 🌿 Animal Crossing Museum Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web para explorar y gestionar la colección del museo de **Animal Crossing: New Horizons**. Consulta fósiles, peces, insectos y criaturas marinas, y lleva un registro de los items que ya tienes en tu museo personal.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Características
 
-## React Compiler
+- 🦴 **Fósiles** — Listado completo con precio, tamaño y puntuación HHA
+- 🐟 **Peces** — Disponibilidad por hemisferio, ubicación, tamaño de sombra y precio
+- 🐛 **Insectos** — Disponibilidad por hemisferio, ubicación y precio con Flick
+- 🐙 **Criaturas marinas** — Disponibilidad, tamaño de sombra y precio
+- 🏛️ **Mi Museo** — Colección personal persistente con posibilidad de añadir y quitar items
+- 🔍 **Buscador** — Filtrado por nombre en tiempo real dentro de cada categoría
+- 🌐 **100% en español** — Valores de la API traducidos al español
+- 📱 **Responsive** — Adaptado a móvil, tablet y escritorio con menú hamburguesa en mobile
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Stack tecnológico
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+| Tecnología                                     | Uso                       |
+| ---------------------------------------------- | ------------------------- |
+| [React 19](https://react.dev)                  | UI                        |
+| [TypeScript](https://www.typescriptlang.org)   | Tipado estático           |
+| [Vite](https://vitejs.dev)                     | Bundler y dev server      |
+| [React Router 7](https://reactrouter.com)      | Enrutamiento              |
+| [TanStack Query 5](https://tanstack.com/query) | Fetching y caché de datos |
+| [Tailwind CSS 4](https://tailwindcss.com)      | Estilos                   |
+| [shadcn/ui](https://ui.shadcn.com)             | Componentes UI            |
+| [Framer Motion](https://www.framer.com/motion) | Animaciones               |
+| [Axios](https://axios-http.com)                | Cliente HTTP              |
+| [ACNH API](https://acnhapi.com)                | Datos del juego           |
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🚀 Instalación y uso
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerrequisitos
+
+- Node.js 18+
+- npm o pnpm
+
+### Variables de entorno
+
+Crea un archivo `.env` en la raíz del proyecto:
+
+```env
+VITE_API_URL=https://acnhapi.com/v1/
+VITE_API_KEY=tu_api_key
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Comandos
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# Instalar dependencias
+npm install
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Servidor de desarrollo
+npm run dev
+
+# Build de producción
+npm run build
+
+# Vista previa del build
+npm run preview
+
+# Lint
+npm run lint
 ```
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+src/
+├── collectionables/
+│   ├── api/              # Instancia de Axios
+│   ├── bugs/             # Acciones de insectos
+│   ├── fishes/           # Acciones, hooks y página de peces
+│   ├── fossils/          # Acciones, hooks y página de fósiles
+│   ├── mollusks/         # Acciones de criaturas marinas
+│   ├── components/       # Header, Footer, búsqueda, breadcrumbs
+│   ├── context/          # Contexto del museo personal
+│   ├── hooks/            # Hooks compartidos (categoría, traducción, totales…)
+│   ├── layouts/          # Layout principal con outlet
+│   ├── pages/            # Home, CollectionList, Item, MuseumPage
+│   └── types/            # Interfaces TypeScript
+├── components/
+│   ├── CollectionCard    # Tarjeta de categoría en Home
+│   ├── CollectionGrid    # Grid de categorías en Home
+│   ├── ItemCard          # Grid de items por categoría
+│   └── ui/               # Componentes shadcn/ui
+├── router/               # Definición de rutas
+└── main.tsx
+```
+
+---
+
+## 🗺️ Rutas
+
+| Ruta                   | Descripción                       |
+| ---------------------- | --------------------------------- |
+| `/`                    | Home con las categorías del museo |
+| `/:itemCategory`       | Listado de items de una categoría |
+| `/:itemCategory/:item` | Detalle de un item                |
+| `/musseum`             | Mi museo personal                 |
+
+---
+
+## 📄 Licencia
+
+Proyecto personal con fines educativos. Animal Crossing™ es propiedad de Nintendo.
