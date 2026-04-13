@@ -30,6 +30,7 @@ import { useAllFossils } from "../fossils/hooks/useAllFossils";
 import { useAllFossilGroups } from "../fossils/hooks/useAllFossilGroups";
 import { useRandomFossils } from "../fossils/hooks/useRandomFossils";
 import { useGetCategory } from "../hooks/useGetCategory";
+import { useTranslateItemData } from "../hooks/useTranslateItemData";
 import type { Fossil } from "../types/fossil.interface";
 import { motion } from "framer-motion";
 import { useMuseum } from "../context/MusseumContext";
@@ -84,6 +85,14 @@ export const Item = () => {
   };
 
   const { isMusseum, toggleMusseum } = useMuseum();
+  const {
+    translateRarity,
+    translateLocation,
+    translateShadowSize,
+    translateMonths,
+    translateTime,
+    translateWeather,
+  } = useTranslateItemData();
 
   const handleClickAddToMusseum = () => {
     if (!itemData) return;
@@ -227,7 +236,7 @@ export const Item = () => {
                                 Rareza
                               </p>
                               <p className="font-bold translate-x-1 text-gray-900">
-                                {liveData?.rarity}
+                                {translateRarity(liveData?.rarity ?? "")}
                               </p>
                             </div>
                           </div>
@@ -248,7 +257,9 @@ export const Item = () => {
                                   Ubicación
                                 </p>
                                 <p className="font-bold translate-x-1 text-gray-900">
-                                  {(itemData as Fish | Bug)?.location}
+                                  {translateLocation(
+                                    (itemData as Fish | Bug)?.location ?? "",
+                                  )}
                                 </p>
                               </div>
                             </div>
@@ -256,23 +267,27 @@ export const Item = () => {
                         )}
 
                         {/* Shadow size – Fish y Mollusk, no Bug */}
-                        {itemCategory !== "bugs" && (
-                          <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-5 border border-blue-100 shadow-sm">
-                            <div className="flex justify-center items-center">
-                              <div className="p-2 bg-blue-100 rounded-xl mr-3">
-                                <Waves className="h-5 w-5 text-blue-700" />
-                              </div>
-                              <div>
-                                <p className="text-xs text-blue-600 uppercase tracking-wide font-medium">
-                                  Sombra
-                                </p>
-                                <p className="font-bold translate-x-1 text-gray-900">
-                                  {(itemData as Fish | Mollusk)?.shadow_size}
-                                </p>
+                        {itemCategory !== "bugs" &&
+                          (itemData as Fish | Mollusk)?.shadow_size && (
+                            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-5 border border-blue-100 shadow-sm">
+                              <div className="flex justify-center items-center">
+                                <div className="p-2 bg-blue-100 rounded-xl mr-3">
+                                  <Waves className="h-5 w-5 text-blue-700" />
+                                </div>
+                                <div>
+                                  <p className="text-xs text-blue-600 uppercase tracking-wide font-medium">
+                                    Sombra
+                                  </p>
+                                  <p className="font-bold translate-x-1 text-gray-900">
+                                    {translateShadowSize(
+                                      (itemData as Fish | Mollusk)
+                                        ?.shadow_size ?? "",
+                                    )}
+                                  </p>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        )}
+                          )}
 
                         {/* Tank size – común */}
                         <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 border border-indigo-100 shadow-sm">
@@ -282,7 +297,7 @@ export const Item = () => {
                             </div>
                             <div>
                               <p className="text-xs text-indigo-600 uppercase tracking-wide font-medium">
-                                Pecera
+                                {itemCategory === "bugs" ? "Jaula" : "Pecera"}
                               </p>
                               <p className="font-bold translate-x-1 text-gray-900">
                                 {liveData?.tank_width} × {liveData?.tank_length}
@@ -307,7 +322,8 @@ export const Item = () => {
                             </p>
                             {liveData?.north.availability_array.map((a, i) => (
                               <p key={i} className="text-sm text-gray-700">
-                                {a.months} · {a.time}
+                                {translateMonths(a.months)} ·{" "}
+                                {translateTime(a.time)}
                               </p>
                             ))}
                           </div>
@@ -317,7 +333,8 @@ export const Item = () => {
                             </p>
                             {liveData?.south.availability_array.map((a, i) => (
                               <p key={i} className="text-sm text-gray-700">
-                                {a.months} · {a.time}
+                                {translateMonths(a.months)} ·{" "}
+                                {translateTime(a.time)}
                               </p>
                             ))}
                           </div>
