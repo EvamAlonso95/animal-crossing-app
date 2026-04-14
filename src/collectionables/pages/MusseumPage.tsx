@@ -11,7 +11,7 @@ export const MusseumPage = () => {
 
   return (
     <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8 mx-auto">
-      <CustomBreadCrums categoryName={"Mi museo"} />
+      <CustomBreadCrums />
       <div className="w-full">
         {musseum.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 text-muted-foreground gap-4">

@@ -59,22 +59,7 @@ export const Item = () => {
   const [seed, setSeed] = useState(0);
   const randomFossils = useRandomFossils(fossils, groups, itemName ?? "", seed);
 
-  let itemData: Fossil | Fish | Bug | Mollusk | undefined;
-
-  if (itemCategory === "fossils") {
-    itemData = rawData as Fossil;
-  }
-  if (itemCategory === "fishes") {
-    itemData = rawData as Fish;
-  }
-
-  if (itemCategory === "bugs") {
-    itemData = rawData as Bug;
-  }
-
-  if (itemCategory === "sea") {
-    itemData = rawData as Mollusk;
-  }
+  const itemData: Fossil | Fish | Bug | Mollusk | undefined = rawData;
 
   const liveData = ["fishes", "bugs", "sea"].includes(itemCategory ?? "")
     ? (itemData as Fish | Bug | Mollusk)

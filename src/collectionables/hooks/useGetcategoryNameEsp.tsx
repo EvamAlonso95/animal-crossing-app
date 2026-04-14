@@ -2,19 +2,14 @@ export interface Props {
   itemCategory: string;
 }
 
-export const useGetcategoryNameEsp = (itemCategory: string) => {
-  const displayName =
-    itemCategory === "fossils"
-      ? "Fósiles"
-      : itemCategory === "fishes"
-        ? "Peces"
-        : itemCategory === "bugs"
-          ? "Bichos"
-          : itemCategory === "sea"
-            ? "Moluscos"
-            : itemCategory === "musseum"
-              ? "Museo"
-              : itemCategory;
+const CATEGORY_NAMES: Record<string, string> = {
+  fossils: "Fósiles",
+  fishes: "Peces",
+  bugs: "Bichos",
+  sea: "Moluscos",
+  musseum: "Museo",
+};
 
-  return displayName;
+export const useGetcategoryNameEsp = (itemCategory: string) => {
+  return CATEGORY_NAMES[itemCategory] ?? itemCategory;
 };
