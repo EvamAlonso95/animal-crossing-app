@@ -13,7 +13,7 @@ export const Footer = () => {
         <p className="text-xs text-muted-foreground">
           Datos proporcionados por{" "}
           <a
-            href="https://acnhapi.com"
+            href="https://api.nookipedia.com/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-primary hover:underline"

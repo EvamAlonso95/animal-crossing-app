@@ -30,7 +30,8 @@ Aplicación web para explorar y gestionar la colección del museo de **Animal Cr
 | [shadcn/ui](https://ui.shadcn.com)             | Componentes UI            |
 | [Framer Motion](https://www.framer.com/motion) | Animaciones               |
 | [Axios](https://axios-http.com)                | Cliente HTTP              |
-| [ACNH API](https://acnhapi.com)                | Datos del juego           |
+| [Nookipedia API](https://api.nookipedia.com)   | Datos del juego           |
+| [Netlify Functions](https://docs.netlify.com/build/functions/overview/) | Proxy seguro de la API |
 
 ---
 
@@ -43,12 +44,15 @@ Aplicación web para explorar y gestionar la colección del museo de **Animal Cr
 
 ### Variables de entorno
 
-Crea un archivo `.env` en la raíz del proyecto:
+Crea un archivo `.env` en la raíz del proyecto. Esta variable es exclusiva del servidor y no debe usar el prefijo `VITE_`:
 
 ```env
-VITE_API_URL=https://acnhapi.com/v1/
-VITE_API_KEY=tu_api_key
+NOOKIPEDIA_API_KEY=tu_api_key
 ```
+
+Configura la misma variable en Netlify mediante **Project configuration > Environment variables**. No expongas la clave en variables `VITE_*`, código cliente, logs ni commits.
+
+Si una clave estuvo expuesta en el navegador o en el historial del repositorio, revócala en Nookipedia, genera una nueva y actualiza `NOOKIPEDIA_API_KEY` en Netlify y en tu `.env` local. Nunca documentes ni reutilices el valor anterior.
 
 ### Comandos
 
@@ -56,8 +60,11 @@ VITE_API_KEY=tu_api_key
 # Instalar dependencias
 npm install
 
-# Servidor de desarrollo
+# Desarrollo local con Vite, Netlify Functions y el proxy /api (http://localhost:8888)
 npm run dev
+
+# Solo interfaz Vite (http://localhost:5173); no sirve el proxy /api
+npm run dev:vite
 
 # Build de producción
 npm run build
@@ -67,6 +74,9 @@ npm run preview
 
 # Lint
 npm run lint
+
+# Tests del límite de la API y del proxy
+npm test
 ```
 
 ---
